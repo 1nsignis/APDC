@@ -56,7 +56,7 @@ public class RemoveResource {
              return Response.status(Status.FORBIDDEN).entity("erro").build();
            }
            
-           if (this.validRole("USER", userRemovingToken) && userRemovingToken.getString(user).equals(user)) {
+           if (this.validRole("USER", userRemovingToken) && token.user.equals(user)) {
         	   txn.delete(userKey, tokenKey);
                txn.commit();
                return Response.ok().entity("User Deleted: " + user).build();

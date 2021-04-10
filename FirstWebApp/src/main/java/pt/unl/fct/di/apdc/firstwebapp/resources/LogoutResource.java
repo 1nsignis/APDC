@@ -36,15 +36,15 @@ public class LogoutResource {
     public LogoutResource() { } //empty constructor
     
     @POST
-    @Path("/{user}")
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response doLogout(@PathParam("user") String user, AuthToken token) {
+    public Response doLogout(AuthToken token) {
     	Transaction txn = datastore.newTransaction();
 
         try {
         	
            Key tokenKey = datastore.newKeyFactory()
-          		 .addAncestor(PathElement.of("User", user))
+          		 .addAncestor(PathElement.of("User", token.user))
           		 .setKind("Token")
           		 .newKey("token");
            
